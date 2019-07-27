@@ -74,6 +74,8 @@ app.get('/BarangAll', function (req, res) {
         "barang_laris": 0,
         "uom": "unit"
     }];
+
+    //resloves the CORS-ORIGIN ISSUE
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.send(data);
