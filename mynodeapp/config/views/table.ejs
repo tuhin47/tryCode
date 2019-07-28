@@ -1,0 +1,59 @@
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
+<table id='table'>
+    <tr>
+        <th>extension</th>
+        <th>Answered Call</th>
+        <th>Busy Call</th>
+        <th>Fail Call</th>
+        <th>Duration</th>
+        <th>Billsec</th>
+    </tr>
+    <%for(var i = 0; i < data.results.length; i++){%>
+    <tr>
+        <td><%=data.results[i]._id%></td>
+
+        <td onclick="loadData(this,<%=JSON.stringify(data.results[i].Test)%>,'count','ANSWERED');"></td>
+        <td onclick="loadData(this,<%=JSON.stringify(data.results[i].Test)%>,'count','BUSY')"></td>
+        <td onclick="loadData(this,<%=JSON.stringify(data.results[i].Test)%>,'count','FAILED')"></td>
+        <td onclick="loadData(this,<%=JSON.stringify(data.results[i].Test)%>,'duration','ANSWERED')"></td>
+        <td onclick="loadData(this,<%=JSON.stringify(data.results[i].Test)%>,'billsec','ANSWERED')"></td>
+
+    </tr>
+    <%}%>
+</table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    
+
+    $(document).ready(function(){
+        $('#table tr td').click();
+    });
+
+     function loadData(td,result,key,check) {
+        //  console.log(td);
+         var val=0;
+         result.forEach(el => {
+
+            console.log(el.disposition.toUpperCase(),check,el[key]);
+            if(el.disposition.toUpperCase()==check)
+                 val=el[key];
+            
+         });
+         td.innerHTML=val;
+     }
+
+</script>
