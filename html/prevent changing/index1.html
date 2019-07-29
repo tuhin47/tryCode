@@ -1,0 +1,90 @@
+<button type='button' id="positionsadd">click</button>
+
+<table id='cloneDoc'></table>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script>
+    $("table").change(function (event) {
+            console.log(event.target);
+            
+            if (event.target.nodeName == 'INPUT')
+                $(event.target).attr('value', event.target.value);
+            if (event.target.nodeName == 'SELECT')
+                $(event.target).find('option:selected')[0].setAttribute('selected',true);
+                
+        });
+
+
+    document.getElementById("positionsadd").addEventListener("click", function () {
+
+        var min = 498;
+        var max = 875;
+        random = Math.floor(Math.random() * (max - min)) + min;
+        let f = 1;
+        htmlClone =
+            `<tr class="mainrow${random}" id="mainrow${random}">
+    <td>
+        <table class="position">
+            <tbody>
+                <tr class="position-numbers position-numbers-clone${random}" >
+
+
+                </tr>
+
+            </tbody>
+        </table>
+    </td>
+    <td class="select-technique">
+        <select class="technique-class${random}" id="technique-class${random}" onclick="myOnChange(this)">
+                <option value="one">One</option>
+                 <option value="two">Two</option>
+        </select>
+        
+    </td>
+    <td>
+        <table class="choose_colors">
+            <tbody class="choose_colors_body">
+                <tr>
+                    <td><span>1</span></td>
+                    <td><span>2</span></td>
+                    <td><span>3</span></td>
+                    <td><span>4</span></td>
+                </tr>
+                <tr>
+                    <td><span>5</span></td>
+                    <td><span>6</span></td>
+                    <td><span>7</span></td>
+                    <td><span>8</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+    <td>
+        <table class="choose_size">
+            <tr>
+                <td>H</td>
+                <td><input type="" name="vh" value="50" /></td>
+            </tr>
+            <tr>
+                <td>w</td>
+                <td><input type="" name="vw" value="46" /></td>
+            </tr>
+        </table>
+    </td>
+    <td colspan="2">
+        <label>48.00 INR</label>
+    </td>
+    <td colspan="2" class="clear${random}">
+        <label>X</label>
+    </td>
+</tr>`;
+
+        document.getElementById('cloneDoc').innerHTML += htmlClone;
+
+    });
+
+    function myOnChange(params) {
+        console.log(params);
+
+    }
+</script>
