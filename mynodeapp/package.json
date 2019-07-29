@@ -32,6 +32,7 @@
     "numeral": "latest",
     "passport": "latest",
     "passport-local": "latest",
+    "path": "^0.12.7",
     "pm2": "latest",
     "request": "latest",
     "serve-favicon": "latest",
