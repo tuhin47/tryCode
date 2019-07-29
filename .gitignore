@@ -1,1 +1,4 @@
 mynodeapp/node_modules/
+html/animate to previous/
+*.pyc
+django/db.sqlite3
