@@ -1,0 +1,29 @@
+<div class="body-content">
+    <div class="body-tags">
+        <button id='Appartements' onclick="changeSelectedTag('Appartements',<%=JSON.stringify(projects)%>)">Appartements</button>
+        <button onclick="changeSelectedTag('Maisons',<%=JSON.stringify(projects)%>)">Maisons</button>
+
+    </div>
+    <div id='here' class="projects-container"></div>
+</div>
+<script type="text/javascript">
+    changeSelectedTag = function (tag,projects) {
+        selectedTag = tag;
+        console.log(selectedTag);
+        var main=document.getElementById('here');
+        main.innerHTML='';
+        var div= document.createElement('div');
+        div.className='projects-content';
+        var h2=document.createElement('h2');
+        h2.className='project-title';
+        console.log(projects);
+        projects.forEach(el => {
+            if(el.tags.includes(selectedTag))
+                h2.innerHTML=el.title;
+        });
+        div.appendChild(h2);
+        main.appendChild(div);
+    }
+    document.getElementById('Appartements').click();
+    //changeSelectedTag('Appartements',<%=JSON.stringify(projects)%>);
+</script>
