@@ -14,6 +14,10 @@ app.get('/', function (req, res) {
     },{
         title:'two',
         tags:['Maisons']
+    },
+    {
+        title:'three',
+        tags:['Maisons']
     }];
     res.render('projects', {selectedTag:'Appartements',projects:projects});
 });
