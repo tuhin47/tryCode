@@ -11,6 +11,7 @@
     "connect": "latest",
     "connect-flash": "latest",
     "cookie-parser": "latest",
+    "cors": "^2.8.5",
     "dateformat": "latest",
     "debug": "latest",
     "ejs": "latest",
