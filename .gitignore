@@ -2,3 +2,5 @@ mynodeapp/node_modules/
 html/animate to previous/
 *.pyc
 django/db.sqlite3
+html/append textbox dynamacally/
+html/matching-master/

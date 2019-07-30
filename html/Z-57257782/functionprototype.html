@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>HTML5</title>
+</head>
+
+<body>
+        <a href="http:\\goo.me">Link1</a>
+    <div class="MyBlock"><a href="http:\\goo.me">Link2</a><br> </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+    </script>
+</body>
+
+</html>
+
+<script>
+    jQuery.fn.PageBlocks = function () {
+        // console.log(this);
+        return this.filter(function () {
+            var $this = $(this);
+            var tagName = $this.prop("tagName").toLowerCase();
+            // console.log(tagName);
+            return $this.css("display") == 'block' && tagName == 'div';
+        });
+
+    }
+    $(document).ready(function () {
+        var res = $('*').PageBlocks();
+        console.log(res);
+
+        $.each(res, function (index, val) {
+            $(val).find('a').attr("target", "_blank");
+        });
+    })
+</script>
