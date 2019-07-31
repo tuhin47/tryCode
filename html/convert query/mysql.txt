@@ -1,0 +1,27 @@
+select pair1,pair2,nb from (
+select pair1,pair2,nb from (
+select  (select t.name  from type_3 t where t.assetId= 'BDMRyZsmDZpgKhdM7fUTknKcUbVVkDpMcqEj31PUzjMy' ) as pair1,"waves" as pair2 ,count(*) nb from type_7
+where 
+order1_assetPair_PriceAsset is null and order1_assetPair_amountAsset= 'BDMRyZsmDZpgKhdM7fUTknKcUbVVkDpMcqEj31PUzjMy' 
+group by pair1,"waves"
+union
+(select  least(ab , ba) pair1, greatest(ab, ba) pair2, count(*) nb
+from (select t.name   ab,t2.name  ba from type_3 t,type_3 t2,type_7 t7
+where t.assetId=t7.order1_assetPair_amountAsset
+and t2.assetId=t7.order1_assetPair_priceAsset
+) sb
+where ab in (select t.name  from type_3 t where t.assetId= 'BDMRyZsmDZpgKhdM7fUTknKcUbVVkDpMcqEj31PUzjMy'    ) or ba in (select t.name  from type_3 t where t.assetId= 'BDMRyZsmDZpgKhdM7fUTknKcUbVVkDpMcqEj31PUzjMy'   )
+group by least(ab,ba), greatest(ab,ba)  order by nb desc limit 10)) newtable where pair1='Tokes'
+union
+select pair2,pair1,nb from (
+select  (select t.name  from type_3 t where t.assetId= 'BDMRyZsmDZpgKhdM7fUTknKcUbVVkDpMcqEj31PUzjMy'  )as pair1,"waves" as pair2 ,count(*) nb from type_7
+where 
+order1_assetPair_PriceAsset is null and order1_assetPair_amountAsset= 'BDMRyZsmDZpgKhdM7fUTknKcUbVVkDpMcqEj31PUzjMy' 
+group by pair1,"waves"
+union
+(select  least(ab , ba) pair1, greatest(ab, ba) pair2, count(*) nb
+from (select t.name   ab,t2.name  ba from type_3 t,type_3 t2,type_7 t7
+where t.assetId=t7.order1_assetPair_amountAsset
+and t2.assetId=t7.order1_assetPair_priceAsset ) sb
+where ab in (select t.name  from type_3 t where t.assetId= 'BDMRyZsmDZpgKhdM7fUTknKcUbVVkDpMcqEj31PUzjMy' ) or ba in (select t.name  from type_3 t where t.assetId= 'BDMRyZsmDZpgKhdM7fUTknKcUbVVkDpMcqEj31PUzjMy'  )
+group by least(ab,ba), greatest(ab,ba)  order by nb desc limit 10)) newtable where pair2='Tokes') t order by nb desc;
