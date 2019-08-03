@@ -1,0 +1,177 @@
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+        var dataTable = $('#example').dataTable();
+        dataTable.on('search.dt', function () {
+
+            $('.dataTables_filter input').unbind().keyup(function (e) {
+                var value = $(this).val();
+                value='true|'+value
+                console.log(value);
+                dataTable.fnFilter(value, null, true, false, true, true);
+            })
+
+
+        });
+        $('table').find('tr').on('change', function (event) {
+            console.log($(this).index());
+            console.log(event.target.checked);
+            if (event.target.checked) {
+                $(event.target).attr('checked', 'checked');
+                $(event.target).parent().append('<div id="true" hidden>true</div>');
+            } else {
+                $(event.target).removeAttr('checked');
+                $(event.target).parent().find('div').remove("#haha");
+                
+
+            }
+            //reload a specific row 
+            // dataTable.api().row($(this).index()).invalidate().draw();
+            //reload all row
+            dataTable.api().rows().invalidate().draw();
+
+        })
+
+
+
+
+
+    })
+</script>
+
+
+
+
+<script>
+    // $(document).ready(function () {
+
+    //     //$('#example').dataTable( );
+
+    //     var oTable = $('#example').DataTable();
+    //     // {
+    //     //     "search": {
+    //     //         "search": "33"
+    //     //     }
+    //     // }
+
+    //     // {
+    //     //     "columnDefs": [{
+    //     //         "targets": [0],
+    //     //         "searchable": false
+    //     //     }]
+    //     // }
+    //     oTable.on('search.dt', function () {
+    //         var value = $('.dataTables_filter input').val();
+    //         console.log(value); // <-- the value
+
+    //         $('.dataTables_filter input').unbind().keyup(function () {
+    //             var value = $(this).val();
+
+    //             //oTable.search(value).draw();
+    //             oTable.search(value).draw();
+    //             //oTable.fnFilter(filter, null, true, false, true, true);
+
+    //         });
+
+    //     });
+
+
+    // })
+</script>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.dataTables.min.css">
+
+<style>
+    thead input {
+        width: 100%;
+    }
+</style>
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>checkbox</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td>61</td>
+            <td>2011/04/25</td>
+            <td>$320,800</td>
+        </tr>
+        <tr>
+
+            <td><input type="checkbox" /></td>
+            <td>Garrett Winters</td>
+            <td>Accountant</td>
+            <td>Tokyo</td>
+            <td>63</td>
+            <td>2011/07/25</td>
+            <td>$170,750</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>Ashton Cox</td>
+            <td>Junior Technical Author</td>
+            <td>San Francisco</td>
+            <td>66</td>
+            <td>2009/01/12</td>
+            <td>$86,000</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>22</td>
+            <td>2012/03/29</td>
+            <td>$433,060</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>Airi Satou</td>
+            <td>Accountant</td>
+            <td>Tokyo</td>
+            <td>33</td>
+            <td>2008/11/28</td>
+            <td>$162,700</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>Brielle Williamson</td>
+            <td>Integration Specialist</td>
+            <td>New York</td>
+            <td>61</td>
+            <td>2012/12/02</td>
+            <td>$372,000</td>
+        </tr>
+        
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </tfoot>
+</table>
