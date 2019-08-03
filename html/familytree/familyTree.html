@@ -1,0 +1,17 @@
+<script>
+    const logFileText = async file => {
+        const response = await fetch(file);
+        const text = await response.text();
+        console.clear();
+        //console.log(text);
+        
+        var parser = new DOMParser();
+        var xmlDoc = parser.parseFromString(text, "text/xml");
+        
+        var data = xmlDoc.getElementsByTagName("mxCell");
+
+        console.log(data);
+        
+    }
+    logFileText('family.xml');
+</script>
