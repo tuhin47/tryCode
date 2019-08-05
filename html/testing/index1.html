@@ -1,0 +1,50 @@
+<!-- <script>
+
+let user = process.env.USER || ""
+console.log(user);
+
+</script> -->
+
+<h1>Test</h1>
+
+<div id='mytable'></div>
+<script>
+  var attrs = ["id", "phone", "email", "address"];
+  var xmlString =
+    '<message>\n' +
+    '  <senses>\n' +
+    '    <sense id="GFDT002" phone="2345234" email="test@email.com" address="60 test street" >\n' +
+    '      <definition><b>test</b> are <a href="http://test.com">test</a>test<a href="test.com">test</a>,test <a href="http://test.com">genus</a> <i><b>Apteryx</b></i> test <b>test</b>.test  <a href="http://test.com">test</a>test <a href="http://test.com">egg</a> test.</definition>\n' +
+    '    </sense>\n' +
+
+    '';
+
+</script>
+
+
+<script>
+var parser = new DOMParser();
+var xmlDoc = parser.parseFromString(xmlString, "text/xml")
+var test = xmlDoc.getElementsByTagName("sense");
+
+//create table
+var myTableDiv = document.getElementById("mytable")
+var table = document.createElement('table');
+var tableBody = document.createElement('tbody');
+table.appendChild(tableBody);
+
+
+Object.keys(test).forEach(el => {
+  var tr = document.createElement('tr');
+  tableBody.appendChild(tr);
+  attrs.forEach(val => {
+    var td = document.createElement('td');
+    td.width = '100';
+    td.innerHTML = test[el].getAttribute(val);
+    tr.appendChild(td);
+  });
+});
+
+myTableDiv.appendChild(table);
+
+</script>

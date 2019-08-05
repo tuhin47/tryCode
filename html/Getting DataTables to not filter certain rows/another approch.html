@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+    <script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script type="application/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+
+</head>
+
+<body>
+    <input id="searchbar"></input>
+    <table></table>
+
+</body>
+
+</html>
+
+<script>
+    const srcData = [{
+            item: 'apple',
+            type: 'fruit'
+        },
+        {
+            item: 'banana',
+            type: 'fruit'
+        },
+        {
+            item: 'strawberry',
+            type: 'berry'
+        },
+        {
+            item: 'carrot',
+            type: 'vegie'
+        }
+    ];
+
+    const dataTable = $('table').DataTable({
+        dom: 't',
+        data: srcData,
+        columns: [{
+                data: 'item',
+                title: 'item',
+                render: data => '<input type="checkbox"></input>' + data
+            },
+            {
+                data: 'type',
+                title: 'type'
+            }
+        ]
+    });
+
+    $.fn.dataTable.ext.search.push((_, __, rowIdx, dataObj) => Object.values(dataObj).some(cellData => cellData
+        .toLowerCase().includes($('#searchbar').val().toLowerCase())) || $(dataTable.row(rowIdx).node()).is(
+        ':has(:checked)'));
+
+    $('#searchbar').on('keyup', () => dataTable.draw());
+</script>
