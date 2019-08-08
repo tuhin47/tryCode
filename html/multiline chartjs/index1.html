@@ -1,0 +1,84 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+<canvas id="myChart" width="200" height="200"></canvas>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var dataset = {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: []
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+}
+
+function getRandomRgb() {
+  var num = Math.round(0xffffff * Math.random());
+  var r = num >> 16;
+  var g = num >> 8 & 255;
+  var b = num & 255;
+  return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+}
+
+
+
+var getData = function(chartdata) {
+  $.ajax({
+    url: 'https://api.myjson.com/bins/qw7np',
+    //url:'https://api.myjson.com/bins/fadwx',
+    success: function(data) {
+
+      console.log(data);
+      var dates = [];
+      Object.keys(data).forEach((k, i) => {
+        var obj = {};
+        obj['label'] = k;
+        obj['fill'] = false;
+        obj['data'] = [];
+        obj['borderColor'] = getRandomRgb();
+        chartdata.data.datasets.push(obj);
+        data[k].forEach(el => {
+          dates.push(el.CreatedDate);
+        });
+      });
+      dates = [...new Set(dates)].sort();
+      chartdata.data.labels = dates;
+      Object.keys(data).forEach((k, i) => {
+
+
+        dates.forEach(d => {
+          var mark = true;
+          data[k].forEach(el => {
+            if (el.CreatedDate === d) {
+              mark = false;
+              chartdata.data.datasets[i].data.push(el
+                .NumLeads);
+            }
+          });
+          if (mark)
+            chartdata.data.datasets[i].data.push(0);
+
+        });
+
+      });
+      console.log(chartdata);
+
+
+
+      var myChart = new Chart(ctx, chartdata);
+
+    }
+  });
+};
+getData(dataset);
+</script>
