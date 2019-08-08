@@ -41,6 +41,7 @@
     "request": "latest",
     "serve-favicon": "latest",
     "simple-encryptor": "latest",
-    "underscore": "latest"
+    "underscore": "latest",
+    "ytdl-core": "^0.29.5"
   }
 }
