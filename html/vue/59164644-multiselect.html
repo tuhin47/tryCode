@@ -2,35 +2,34 @@
 <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
 <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 <div id="app">
-  <multiselect 
-    v-model="categories"
-               class="form-control"
-               v-model="categories"
-               tag-placeholder="Add this as new tag"
-               placeholder="Search or add a tag"
-               label="name"
-               track-by="_id"
-               :options="categoriesList"
-               value-field="_id"
-               text-field="_id"
-               :multiple="true"
-             :taggable="true"
-    >
+  <multiselect v-model="categories" class="form-control" v-model="categories" tag-placeholder="Add this as new tag"
+    placeholder="Search or add a tag" label="name" track-by="_id" :options="categoriesList" value-field="_id"
+    text-field="_id" :multiple="true" :taggable="true">
   </multiselect>
   <pre>{{ categoriesList }}</pre>
 </div>
 
 <script>
-new Vue({
-	components: {
-  	Multiselect: window.VueMultiselect.default
-	},
-	data: {
-  	categories: [],
-  	categoriesList: [ { "_id": "5ddc465a46a56b19d17e9a15", "name": "Business Card", "updatedBy": "5db95c3c61d80ebe8ba560af", "createdBy": "5db95c3c61d80ebe8ba560af", "isActive": true, "isGlobal": true, "logo": "Categories/5ddc465a46a56b19d17e9a15", "updatedAt": "2019-12-01 04:29:36", "createdAt": "2019-11-25 21:23:38" } ]
+  new Vue({
+    components: {
+      Multiselect: window.VueMultiselect.default
     },
-    created(){
-        this.categories.push(this.categoriesList[0]);
+    data: {
+      categories: [],
+      categoriesList: [{
+        "_id": "5ddc465a46a56b19d17e9a15",
+        "name": "Business Card",
+        "updatedBy": "5db95c3c61d80ebe8ba560af",
+        "createdBy": "5db95c3c61d80ebe8ba560af",
+        "isActive": true,
+        "isGlobal": true,
+        "logo": "Categories/5ddc465a46a56b19d17e9a15",
+        "updatedAt": "2019-12-01 04:29:36",
+        "createdAt": "2019-11-25 21:23:38"
+      }]
+    },
+    created() {
+      this.categories.push(this.categoriesList[0]);
     }
-}).$mount('#app')
+  }).$mount('#app')
 </script>
