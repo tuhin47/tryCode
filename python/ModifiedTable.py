@@ -8,7 +8,7 @@ select = 1
 
 uniq = set()
 
-for x in open("read.log","r").readlines():
+for x in open("0.read.log","r").readlines():
     x = x.lower()
     if update and " update " in x :
         line = x[x.rfind(" update "):]
