@@ -160,23 +160,28 @@
             methods: {
                 startDownload() {
                     //http://localhost:8080/btcl/pdf/view/monthly-bill.do?billId=875104&module=6
-                    var arr = this.vpnDiscount.slice(0, 3);
+                    var arr = this.lli.slice(268, this.lli.size);
                     var count = 0;
                     var start = setInterval(function () {
                         var vpnlink = "http://localhost:8080/btcl/pdf/view/monthly-bill.do?billId=" +
                             arr[count] + "&module=6";
                         var link = "http://localhost:8080/btcl/pdf/view/monthly-bill.do?billId=" + arr[
-                            count] + "&module=6";
+                            count] + "&module=7";
                         document.getElementById("index").innerHTML = "[" + (count + 1) + " : " + arr
                             .length + "]";
                         console.log(link);
-                        window.location.href = link;
+                        //window.location.href = link;
+                        window.open(
+                            link,
+                            '_blank'
+                        )
                         count++;
                         if (count == arr.length) {
                             console.log("============================");
+                            alert("DONEE.....");
                             clearInterval(start);
                         }
-                    }, 5000);
+                    }, 2000);
 
                 },
             },
