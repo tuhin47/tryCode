@@ -26,6 +26,7 @@ app.get('/', function (req, res) {
 
 
 app.post("/upload", upload.array('avatar'), function(req, res, next) {
+    console.log(req.file);
     res.send('ok');
 });
 

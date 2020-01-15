@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <vuejs-datepicker v-model=date :typeable=true>
+        </vuejs-datepicker>
+        <input type="submit" v-on:click="formSubmit">
+        
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vuejs-datepicker"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                date:null
+            },
+            components: {
+                vuejsDatepicker
+            },
+            methods:{
+                formSubmit(){
+                    if(!this.date){
+                        alert('Please select a date');
+                        return;
+                    }
+                    console.log('Selected date is '+ this.date);
+                }
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>
