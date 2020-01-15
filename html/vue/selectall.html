@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.7/vue.js"></script>
+
+  <div id='app'>
+    <table id="example1" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Client Name</th>
+          <th style="width: 10%"><input type="checkbox" v-model="selectAll" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item,index) in clientList">
+          <td style="font-weight: bold;width: 75%">{{item}}
+          </td>
+          <td style="width: 25%"><input type="checkbox" v-model="selected[index]" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    var vue = new Vue({
+      el: '#app',
+
+      data: {
+        selected: [true, true, false, false, false],
+        clientList: [1, 2, 3, 4, 5]
+
+      },
+      computed: {
+        selectAll: {
+          get: function () {
+            return !this.selected.includes(false);
+          },
+          set: function (value) {
+            var selected = [];
+            this.clientList.forEach(function (client) {
+              selected.push(value);
+            });
+            this.selected = selected;
+          }
+        }
+      },
+    });
+  </script>
+
+</body>
+
+</html>
