@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipBoard</title>
+</head>
+
+<body>
+    <div id="capture" style="padding: 10px; background: #f5da55">
+        <h4 style="color: #000">Hello world!</h4>
+    </div>
+
+    <script src="	https://unpkg.com/html2canvas@1.0.0-rc.5/dist/html2canvas.js"></script>
+
+    <button onclick="myFunction()">Ok</button>
+
+    <script>
+        function myFunction() {
+            return html2canvas(document.querySelector("#capture")).then((canvas) =>
+                canvas.toBlob((blob) =>
+                    navigator.clipboard.write([
+                        new ClipboardItem({
+                            "image/png": blob,
+                        }),
+                    ])
+                )
+            );
+        }
+    </script>
+
+</body>
+
+</html>

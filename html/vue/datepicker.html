@@ -1,0 +1,54 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+<form id="app" @submit.prevent="search">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-header"></div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="datepicker" v-model="date" >
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-primary">Search</button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</form>
+<script>
+  $(function() {
+    $("#datepicker").datepicker();
+  });
+  
+  new Vue({
+  el: '#app',
+  data() {
+    return {
+      date: ''
+    }
+  },
+  mounted() {
+    console.log('Component mounted.')
+  },
+  methods: {
+    search() {
+      //I want to get user chooses date here so that I can send to endpoint
+      console.log(this.date) //got nothing here
+
+    },
+
+
+  },
+})
+</script>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* In order to place the tracking correctly */
+        canvas.drawing,
+        canvas.drawingBuffer {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@carloscgo/vue-cc-quaggajs@2.0.0/dist/vue-quagga.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@carloscgo/vue-cc-quaggajs@2.0.0/dist/build.js"></script> -->
+    <div id="app">
+        <scanner :on-detected="logIt" :reader-size="readerSize" reader-type="ean_reader"></scanner>
+    </div>
+
+
+    <script type="module">
+        new Vue({
+            el: "#app",
+            data: {
+                readerSize: {
+                    width: 640,
+                    height: 480
+                }
+            },
+            methods: {
+                logIt(data) {
+                    console.log('detected', data)
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>
