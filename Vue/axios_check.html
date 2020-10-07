@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+/* https://stackoverflow.com/questions/64246941/ */
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+
+<body>
+    <div id="app">
+        <v-app>
+            <v-main>
+                <v-container>
+                    <v-row>
+                        <v-col v-for="batch in covs.all_batches_tuples" :key="batch.id" class="pa-0 ma-0 text-body-2"
+                            cols="1">
+                            <input type="checkbox" :id="batch.id" v-model="batch.selected" :value="batch.bname"
+                                @change="selected_batches" />
+                            <label :for="batch.id">{{ batch.bname }}</label>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-main>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            data: {
+                covs: {
+                    all_batches_tuples: [
+                        { 'id': 45, 'bname': 'tcp_S1153', 'selected': false },
+                        { 'id': 46, 'bname': 'tcp_S1134', 'selected': false }
+                    ]
+                },
+            },
+            methods: {
+                selected_batches() {
+                    console.log("1 ", this.covs.all_batches_tuples)
+                    axios({
+                        method: 'post',
+                        url: 'http://192.168.21.152:8002/showAnns/covs/',
+                        data: {
+                            checked_batches_ids_string: this.covs.all_batches_tuples,
+                        },
+                    })
+                    console.log("2 ", this.covs.all_batches_tuples)
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>
