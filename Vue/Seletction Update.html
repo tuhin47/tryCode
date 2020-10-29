@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <span class="selectboxWrap">
+          <select v-on:change="changeSearchMonths" ref="comCd" v-model="searchParams.searchTaxTerm">
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </span>
+        <span class="selectboxWrap">
+          <select v-on:change="changeSearchMonths" ref="comCd" v-model="searchParams.planConfirmFlag">
+            <option value="P">P</option>
+            <option value="F">F</option>
+          </select>
+        </span>
+        <br>
+        <div class="boxHorizental">
+          <span class="dateRange full">
+            <div class="selectboxWrap">
+              <select v-model="searchParams.searchFromInvoiceDate">
+                <option v-for="opt in monthOptions" v-bind:key="opt.val" v-bind:value="opt.val">
+                  {{ opt.text }}
+                </option>
+              </select>
+            </div>
+            <em class="dash">~</em>
+            <div class="selectboxWrap">
+              <select v-model="searchParams.searchToInvoiceDate">
+                <option v-for="opt in monthOptions" v-bind:key="opt.val" v-bind:value="opt.val">
+                  {{ opt.text }}
+                </option>
+              </select>
+            </div>
+          </span>
+        </div>
+      </div>
+      
+
+<script>
+    new Vue({
+  el: '#app',
+  data: {
+    searchParams: {},
+    monthOptions: [{
+        text: 1,
+        val: '01'
+      },
+      {
+        text: 2,
+        val: '02'
+      },
+      {
+        text: 3,
+        val: '03'
+      },
+      {
+        text: 4,
+        val: '04'
+      },
+      {
+        text: 5,
+        val: '05'
+      },
+      {
+        text: 6,
+        val: '06'
+      },
+      {
+        text: 7,
+        val: '07'
+      },
+      {
+        text: 8,
+        val: '08'
+      },
+      {
+        text: 9,
+        val: '09'
+      },
+      {
+        text: 10,
+        val: '10'
+      },
+      {
+        text: 11,
+        val: '11'
+      },
+      {
+        text: 12,
+        val: '12'
+      }
+    ]
+  },
+  methods: {
+
+    changeSearchMonths: function() {
+      if (this.searchParams.searchTaxTerm === '1' && this.searchParams.planConfirmFlag === 'P') {
+        this.searchParams.searchFromInvoiceDate = '01'
+        this.searchParams.searchToInvoiceDate = '03'
+      } else if (this.searchParams.searchTaxTerm === '1' && this.searchParams.planConfirmFlag === 'F') {
+        this.searchParams.searchFromInvoiceDate = '04'
+        this.searchParams.searchToInvoiceDate = '06'
+      } else if (this.searchParams.searchTaxTerm === '2' && this.searchParams.planConfirmFlag === 'P') {
+        this.searchParams.searchFromInvoiceDate = '07'
+        this.searchParams.searchToInvoiceDate = '09'
+      } else if (this.searchParams.searchTaxTerm === '2' && this.searchParams.planConfirmFlag === 'F') {
+        this.searchParams.searchFromInvoiceDate = '10'
+        this.searchParams.searchToInvoiceDate = '12'
+      }
+      this.$forceUpdate();
+    }
+  },
+  created() {
+
+    this.searchParams.searchTaxTerm = '1'
+    this.searchParams.planConfirmFlag = 'P'
+    this.searchParams.searchFromInvoiceDate = '01'
+    this.searchParams.searchToInvoiceDate = '06'
+  }
+})
+
+</script>
+
+</body>
+</html>

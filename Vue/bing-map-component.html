@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>addcustominfoboxHTML</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+    <style type='text/css'>body{margin:0;padding:0;overflow:hidden;font-family:'Segoe UI',Helvetica,Arial,Sans-Serif}</style>
+</head>
+
+<body>
+<div id='printoutPanel'></div>
+<div id="app">
+    <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+    <div v-show="false">
+        <div ref="infoBox">
+            <my-info-box title="title"  description="awesome description"></my-info-box>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=YourBingMapsKey&callback=loadMapScenario' async defer></script>
+</body>
+
+<script>
+    Vue.component('my-info-box', {
+        template: `
+        <div
+             style="background-color:White; border-style:solid; border-width:medium; border-color:DarkOrange; min-height:100px; width: 240px;">
+            <b  style="position: absolute; top: 10px; left: 10px; width: 220px;">{{title}}</b>
+            <a  style="position: absolute; top: 30px; left: 10px; width: 220px;">{{description}}</a>
+        </div>`,
+        props:['title','description'],
+        created(){
+            console.log('created')
+        }
+    });
+
+    window.mapState = {
+        initMap: false
+    }
+    function loadMapScenario () {
+        window.mapState.initMap = true
+    }
+    new Vue({
+        el: '#app',
+        data:{
+            map:null,
+            infoBox:false,
+            mapState: window.mapState,
+            infoTemplate:null
+        },
+        methods:{
+            addInfoBox(){
+
+            }
+        },
+        watch:{
+            'mapState.initMap' : function (value){
+                console.log(value);
+                if(value){
+                    var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                        center: new Microsoft.Maps.Location(47.60357, -122.32945)
+                    });
+                    var position = map.getCenter();
+                    var componentValue = this.$refs.infoBox;
+                    var infobox = new Microsoft.Maps.Infobox(position, {htmlContent: componentValue});
+                    infobox.setMap(map);
+                    this.addInfoBox();
+                }
+            },
+        }
+    })
+</script>
+
+</html>
