@@ -24,7 +24,8 @@
         <tr v-for="(item,index) in clientList">
           <td style="font-weight: bold;width: 75%">{{item}}
           </td>
-          <td style="width: 25%"><input type="checkbox" v-model="selected[index]" />
+          <td style="width: 25%">
+            <input type="checkbox" :value="item" v-model="selected" />
           </td>
         </tr>
       </tbody>
@@ -36,21 +37,24 @@
       el: '#app',
 
       data: {
-        selected: [true, true, false, false, false],
+        selected: [],
         clientList: [1, 2, 3, 4, 5]
 
       },
       computed: {
         selectAll: {
           get: function () {
-            return !this.selected.includes(false);
+            return this.selected.length>0 &&
+             this.selected.length <= this.clientList.length
           },
           set: function (value) {
-            var selected = [];
-            this.clientList.forEach(function (client) {
-              selected.push(value);
-            });
-            this.selected = selected;
+            let list=[];
+            if(value){
+              this.selected = this.clientList
+            }else{
+              this.selected=[]
+            }
+            
           }
         }
       },

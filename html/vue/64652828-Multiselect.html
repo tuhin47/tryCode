@@ -1,0 +1,32 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script src="https://unpkg.com/vue-multiselect@2.1.6"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+<div id="app">
+    <multiselect v-model="users" :options="usersArray.map(user => user.id)" :multiple="true" :clear-on-select="false"
+        :preserve-search="false" :custom-label="opt => usersArray.find(x => x.id == opt).name">
+    </multiselect>
+    <pre>{{ users }}</pre>
+</div>
+
+<script>
+    new Vue({
+        components: {
+            Multiselect: window.VueMultiselect.default
+        },
+        data: {
+            users: [],
+            usersArray: [
+                { id: 1, name: "A" },
+                { id: 2, name: "B" },
+                { id: 3, name: "C" },
+                { id: 4, name: "D" },
+            ]
+        },
+        methods: {
+            updateValue(value) {
+                console.log(value);
+                this.users.push(value.id);
+            }
+        }
+    }).$mount('#app')
+</script>
